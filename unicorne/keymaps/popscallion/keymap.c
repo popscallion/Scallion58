@@ -20,8 +20,6 @@ enum combos {
     I_K_8,          // I + K = 8
     O_L_9,          // O + L = 9
     P_SCLN_0,       // P + ; = 0
-
-    // Brackets (Horizontal)
     U_I_LPRN,       // U + I = (
     I_O_RPRN,       // I + O = )
     J_K_LCBR,       // J + K = {
@@ -29,10 +27,12 @@ enum combos {
     O_P_MINS,       // O + P = -
     P_BSPC_EQL,     // P + BSPC = =
     M_LEFT_LBRC,    // M + ← = [
-    DOWN_UP_RBRC,   // ↓ + ↑ = ]
+    LEFT_DOWN_RBRC, // ← + ↓ = ]
     QUOT_BSPC_GRV,  // ' + BSPC = `
-
-    // Function Keys & Brightness (Vertical)
+    K_LEFT_COMM,    // K + ← = ,
+    L_DOWN_DOT,     // L + ↓ = .
+    SCLN_UP_SLSH,   // ; + ↑ = /
+    QUOT_RGHT_BSLS, // ' + → = \|
     A_Z_BRIU,       // A + Z = Brightness Up
     S_X_BRID,       // S + X = Brightness Down
     C_D_F13,        // C + D = F13
@@ -40,15 +40,13 @@ enum combos {
     G_B_F15,        // G + B = F15
     N_H_F16,        // N + H = F16
     J_M_F17,        // J + M = F17
-    K_LEFT_F18,     // K + ← = F18
-    L_DOWN_F19,     // L + ↓ = F19
-
-    // Media Controls (Horizontal)
     R_T_BRIU_H,     // R + T = Brightness Up
     F_G_BRID_H,     // F + G = Brightness Down
     Y_U_VOLU,       // Y + U = Volume Up
     H_J_VOLD,       // H + J = Volume Down
 };
+
+
 
 const uint16_t PROGMEM q_a_combo[] = {KC_Q, KC_A, COMBO_END};
 const uint16_t PROGMEM w_s_combo[] = {KC_W, KC_S, COMBO_END};
@@ -67,10 +65,8 @@ const uint16_t PROGMEM k_l_combo[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM o_p_combo[] = {KC_O, KC_P, COMBO_END};
 const uint16_t PROGMEM p_bspc_combo[] = {KC_P, KC_BSPC, COMBO_END};
 const uint16_t PROGMEM m_left_combo[] = {KC_M, KC_LEFT, COMBO_END};
-const uint16_t PROGMEM down_up_combo[] = {KC_DOWN, KC_UP, COMBO_END};
+const uint16_t PROGMEM left_down_combo[] = {KC_LEFT, KC_DOWN, COMBO_END};
 const uint16_t PROGMEM quot_bspc_combo[] = {KC_QUOT, KC_BSPC, COMBO_END};
-
-// New vertical combos
 const uint16_t PROGMEM a_z_combo[] = {KC_A, KC_Z, COMBO_END};
 const uint16_t PROGMEM s_x_combo[] = {KC_S, KC_X, COMBO_END};
 const uint16_t PROGMEM c_d_combo[] = {KC_C, KC_D, COMBO_END};
@@ -78,15 +74,16 @@ const uint16_t PROGMEM f_v_combo[] = {KC_F, KC_V, COMBO_END};
 const uint16_t PROGMEM g_b_combo[] = {KC_G, KC_B, COMBO_END};
 const uint16_t PROGMEM n_h_combo[] = {KC_N, KC_H, COMBO_END};
 const uint16_t PROGMEM j_m_combo[] = {KC_J, KC_M, COMBO_END};
-const uint16_t PROGMEM k_left_combo[] = {KC_K, KC_LEFT, COMBO_END};
-const uint16_t PROGMEM l_down_combo[] = {KC_L, KC_DOWN, COMBO_END};
+const uint16_t PROGMEM k_left_comm_combo[] = {KC_K, KC_LEFT, COMBO_END};
+const uint16_t PROGMEM l_down_dot_combo[] = {KC_L, KC_DOWN, COMBO_END};
+const uint16_t PROGMEM scln_up_slsh_combo[] = {KC_SCLN, KC_UP, COMBO_END};
+const uint16_t PROGMEM quot_rght_bsls_combo[] = {KC_QUOT, KC_RGHT, COMBO_END};
 
 // New horizontal combos
 const uint16_t PROGMEM r_t_combo[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM f_g_combo[] = {KC_F, KC_G, COMBO_END};
 const uint16_t PROGMEM y_u_combo[] = {KC_Y, KC_U, COMBO_END};
 const uint16_t PROGMEM h_j_combo[] = {KC_H, KC_J, COMBO_END};
-
 combo_t key_combos[] = {
     // Numbers
     [Q_A_1] = COMBO(q_a_combo, KC_1),
@@ -108,7 +105,7 @@ combo_t key_combos[] = {
     [O_P_MINS] = COMBO(o_p_combo, KC_MINS),
     [P_BSPC_EQL] = COMBO(p_bspc_combo, KC_EQL),
     [M_LEFT_LBRC] = COMBO(m_left_combo, KC_LBRC),
-    [DOWN_UP_RBRC] = COMBO(down_up_combo, KC_RBRC),
+    [LEFT_DOWN_RBRC] = COMBO(left_down_combo, KC_RBRC),
     [QUOT_BSPC_GRV] = COMBO(quot_bspc_combo, KC_GRV),
 
     // Function Keys & Brightness (Vertical)
@@ -119,14 +116,18 @@ combo_t key_combos[] = {
     [G_B_F15] = COMBO(g_b_combo, KC_F15),
     [N_H_F16] = COMBO(n_h_combo, KC_F16),
     [J_M_F17] = COMBO(j_m_combo, KC_F17),
-    [K_LEFT_F18] = COMBO(k_left_combo, KC_F18),
-    [L_DOWN_F19] = COMBO(l_down_combo, KC_F19),
 
     // Media Controls (Horizontal)
     [R_T_BRIU_H] = COMBO(r_t_combo, KC_BRIU),
     [F_G_BRID_H] = COMBO(f_g_combo, KC_BRID),
     [Y_U_VOLU] = COMBO(y_u_combo, KC_VOLU),
     [H_J_VOLD] = COMBO(h_j_combo, KC_VOLD),
+
+    // Punctuation (NEW)
+    [K_LEFT_COMM] = COMBO(k_left_comm_combo, KC_COMM),
+    [L_DOWN_DOT] = COMBO(l_down_dot_combo, KC_DOT),
+    [SCLN_UP_SLSH] = COMBO(scln_up_slsh_combo, KC_SLSH),
+    [QUOT_RGHT_BSLS] = COMBO(quot_rght_bsls_combo, KC_BSLS),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
