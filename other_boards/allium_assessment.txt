@@ -1,0 +1,91 @@
+1. PCB Technical Specifications (allium58.kicad_pcb)
+
+Layers: The copper layers used are "F.Cu" (Layer 0) and "B.Cu" (Layer 31). Numerous other layers are defined for masks, silkscreen, fabrication, etc..   
+KiCad Version: The file was created or last saved with KiCad version 20221018 (generator pcbnew).   
+Design Rules:
+Pad to Mask Clearance: 0.2mm.   
+Minimum Trace Width: Not explicitly defined in the main (setup) block. The default track width appears to be 0.25mm based on examining trace segments.   
+Minimum Clearance: Not explicitly defined in the main (setup) block for trace-to-trace or trace-to-copper. Pad clearance is often set to 0.15mm.   
+Vias:
+Default Via Size: Not explicitly defined in the main (setup) block. Examining individual vias shows common usage of (size 0.6) (drill 0.3).   
+Tenting: The default plot setting (viasonmask false) suggests vias are generally not tented (mask layer is kept clear of vias).   
+2. Microcontroller Details (allium58.kicad_sch, allium58.kicad_pcb)
+
+Identification: The main microcontroller is U1, a ProMicro module.   
+Pin Count & Package: It's a 24-pin module (12 pins per side).   
+Pin Naming: Pins are named using conventions like D4(PD4), A2(PF5), SCL(PD0), etc., indicating both Arduino pin names and the underlying chip's port/pin names.   
+Unused Pins:
+Pin 7: D4(PD4) - Net unconnected-(U1-D4(PD4)-Pad7). Pad coordinate relative to U1 anchor: (7.6114, 0.762). Absolute: (158.7495, 56.762).   
+Pin 19: A2(PF5) - Net unconnected-(U1-A2(PF5)-Pad19). Pad coordinate relative to U1 anchor: (-7.6086, -1.778). Absolute: (143.5295, 54.222).   
+Pin 20: A3(PF4) - Net unconnected-(U1-A3(PF4)-Pad20). Pad coordinate relative to U1 anchor: (-7.6086, -4.318). Absolute: (143.5295, 51.682).   
+3. Component Technology (allium58.kicad_pcb, allium58.kicad_sch)
+
+Technology Mix: The design uses a mix of Through-Hole (TH) and Surface Mount (SMD) components. The ProMicro (U1), TRRS jack (J2), and Reset Switch (RSW1) are TH. The diodes (D1-D29) are SMD. The keyboard switches (SW1-SW29) use footprints supporting hotswap sockets (SMD) and have through-holes for switch legs.   
+Diodes:
+Reference Designators: D1, D2, ..., D29.   
+Type: SMD, using the kbd:D3_SMD_v2 footprint.   
+Orientation: Pad 1 (Cathode/K) connects to the Row net. Pad 2 (Anode/A) connects to the net leading to the switch column pin.   
+Switch Identifiers:
+Reference Designators: SW1, SW2, ..., SW29.   
+Footprint Name: beekeeb-lib:SW_Gateron_LowProfile_HotSwap.   
+Potential Relocations: Diodes (e.g., D1 at X=137.6) are placed near their corresponding switches (e.g., SW1 at X=131.6). Since the footprint used (beekeeb-lib:SW_Gateron_LowProfile_HotSwap) is already intended for Gateron Low Profile switches (including KS-33), replacing existing switches with KS-33 should not inherently require moving diodes, assuming the current placement respects the keep-out areas of this footprint.   
+Diode-Switch Connection: Switch Pin 1 (Hotswap Pad 1) connects to the Column net (e.g., SW1 Pad 1 -> col5). Switch Pin 2 (Hotswap Pad 2) connects to the Diode Anode (Pad 2) via an intermediate net (e.g., SW1 Pad 2 -> Net-(D1-A) <- D1 Pad 2). The Diode Cathode (Pad 1) connects to the Row net (e.g., D1 Pad 1 -> row0).   
+4. Switch Footprint Analysis (allium58.kicad_pcb)
+
+Current Footprint: beekeeb-lib:SW_Gateron_LowProfile_HotSwap. This footprint supports Gateron Low Profile KS-27 and KS-33 switches.   
+Dimensions:
+Hotswap Socket Pads (SMD): Pad 1 and Pad 2 are rounded rectangles, size 2.5mm x 2.55mm.   
+Pin Spacing (Hotswap Pads): Calculated center-to-center distance is approx. 14.39mm (X-distance: 14.35mm, Y-distance: 1.05mm).   
+Through Holes (NPTH): Drills for switch body/legs are 3mm and 5.25mm diameter.   
+Coordinates (Footprint Anchor):
+SW1: (131.6381, 50)    
+SW18: (36.4381, 92)    
+SW29: (84.0381, 123.75)    
+Spacing (Center-to-Center): The layout uses standard 1U spacing (19.05mm or ~19mm) adjusted for stagger.
+Horizontal: ~19.0mm (e.g., SW7 to SW8: 131.6381 - 112.6381 = 19.0mm).   
+Vertical: ~19.0mm (e.g., SW7 to SW13: 88.1 - 69.1 = 19.0mm). Stagger results in smaller vertical distances between adjacent keys in different rows (e.g., SW1 to SW2: 50 - 47.6 = 2.4mm).   
+5. Matrix Wiring Pattern (allium58.kicad_pcb, allium58.kicad_sch)
+
+Net Names:
+Rows: row0, row1, row2, row3, row4.   
+Columns: col0, col1, col2, col3, col4, col5.   
+Diode Role: Each switch connects a Column net to one side of a diode (Anode). The other side of the diode (Cathode) connects to the Row net. (Switch Pin 1 -> Column, Switch Pin 2 -> Diode Anode; Diode Cathode -> Row).   
+Trace Widths: The typical trace width used for row and column connections is 0.25mm.   
+6. Available GPIO Analysis (allium58.kicad_sch, allium58.kicad_pcb)
+
+List Unused GPIO: The ProMicro (U1) pins identified as unconnected are:
+Pin 7: D4(PD4)    
+Pin 19: A2(PF5)    
+Pin 20: A3(PF4)    
+PCB Locations (Absolute Coordinates):
+Pad for Pin 7 (D4/PD4): (158.7495, 56.762)    
+Pad for Pin 19 (A2/PF5): (143.5295, 54.222)    
+Pad for Pin 20 (A3/PF4): (143.5295, 51.682)    
+7. PCB Structure for Automation (allium58.kicad_pcb, .kicad_sch, .kicad_pro)
+
+Project File Check (.kicad_pro):
+Project Libraries Defined:
+Footprints: "${KIPRJMOD}/libs/beekeeb-lib.pretty", "${KIPRJMOD}/libs/kbd.pretty".   
+Symbols: "${KIPRJMOD}/libs/promicro.kicad_sym".   
+Hierarchy: The schematic appears to be a flat design (no hierarchical sheets) based on component paths and sheet references in the PCB file.   
+Libraries in Use (PCB/Schematic):
+Footprints: Lily58-footprint, kbd, beekeeb-lib are used in the PCB.   
+Symbols: Standard KiCad libraries (Connector, Connector_Generic, Switch, power) and rescued project-specific symbols (Lily58_Pro-rescue) are used in the schematic.   
+Naming Conventions:
+Nets: Logical names (rowX, colX, VCC, GND, SDA, etc.) and auto-generated names (Net-(DX-A)) are used. Unconnected pins have specific unconnected-(REF-PadX) nets.   
+Components: Standard prefixes are used (U, SW, D, J, TH, RSW, PSW, BATJ) followed by sequential numbers.   
+8. Physical Space for 5-Way Switch (allium58.kicad_pcb)
+
+Potential Locations (Approx. Center Coordinates): Based on component placements, potential areas for a ~15x15mm 5-way switch might be:
+Location 1: Below the ProMicro, near the thumb cluster. Center ~ (151, 90).
+Location 2: Bottom left area. Center ~ (40, 118).
+Location 3: Between main key cluster and thumb cluster. Center ~ (108, 115).
+Clearances (Approx.):
+Loc 1 (151, 90): ~7.5mm to SW25, ~9.7mm to BATJ1. Ample vertical space from U1.   
+Loc 2 (40, 118): ~7.6mm to SW24, ~12mm to board edge.   
+Loc 3 (108, 115): ~10mm to SW28, ~11mm to SW20. Other switches further away.   
+Proximity to GPIO: The identified unused GPIO pads (Pad 7, 19, 20) are physically located near the ProMicro U1 anchor (151.1, 56).
+Location 1 (~151, 90) is the closest (~35-40mm direct distance to the pads), but still requires significant routing.
+Locations 2 and 3 are considerably further from the unused GPIO breakout pads.
+  
+This analysis should provide the technical details needed to assess the feasibility of the planned modifications.

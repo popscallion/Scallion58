@@ -289,6 +289,8 @@ void keyboard_pre_init_user(void) {
  * All common programming symbols reachable via intuitive combos while preserving
  * standard QWERTY for muscle memory. Globe key enables native macOS integration.
  *
+ * HOW TO USE:
+ * Place Unicorne in bootloader mode by holding the top left key while plugging it in.
  * Globe key implementation from: https://skip.house/blog/qmk-globe-key
  * Requires KEYBOARD_SHARED_EP = yes in rules.mk for modifier functionality.
  */

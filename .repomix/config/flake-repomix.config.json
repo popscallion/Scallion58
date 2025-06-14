@@ -1,0 +1,35 @@
+{
+  "output": {
+    "filePath": "/Users/l/Dev/Scallion58/flake-repomix-output.txt",
+    "style": "plain",
+    "parsableStyle": false,
+    "headerText": "",
+    "instructionFilePath": "",
+    "fileSummary": true,
+    "directoryStructure": true,
+    "removeComments": false,
+    "removeEmptyLines": false,
+    "topFilesLength": 5,
+    "showLineNumbers": false,
+    "copyToClipboard": true,
+    "includeEmptyDirectories": false,
+    "compress": false
+  },
+  "include": [
+    "flake-lp/pcb/M,S/Flake.kicad_pcb",
+    "flake-lp/pcb/M,S/Flake.kicad_pro",
+    "flake-lp/pcb/M,S/Flake.kicad_sch"
+  ],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": []
+  },
+  "security": {
+    "enableSecurityCheck": true
+  },
+  "tokenCount": {
+    "encoding": "o200k_base"
+  },
+  "cwd": "/Users/l/Dev/Scallion58"
+}

@@ -1,0 +1,55 @@
+**Objective:** Analyze the provided KiCad keyboard project files (<keyboard_name>.kicad_pcb, <keyboard_name>.kicad_pro and <keyboard_name>.kicad_sch) to extract specific technical details relevant to automating modifications. The goal is to assess the feasibility of converting the keyboard to use Gateron KS-33 switches and adding a 5-way navigation switch, primarily through scripted methods.
+
+**Files to Analyze:**
+- Main PCB file: <path_to_keyboard_name>.kicad_pcb
+- Main Schematic file: <path_to_keyboard_name>.kicad_sch
+- Project file: <path_to_keyboard_name>.kicad_pro
+
+**Information to Extract:**
+
+**1. PCB Technical Specifications (from .kicad_pcb)**
+- **Layers:** List the names of all copper layers used (e.g., F.Cu, B.Cu).
+- **Design Rules:** Find the minimum trace width and minimum clearance values defined in the board setup.
+- **Vias:** Determine the default via hole size and via pad diameter. Note if vias are typically tented or exposed (check mask layer definitions relative to vias).
+- **KiCad Version:** Identify the KiCad version the file was created or last saved with (often near the beginning of the file).
+
+**2. Microcontroller Details (primarily from .kicad_sch, verify pin usage in .kicad_pcb)**
+- **Identification:** Find the main microcontroller component. Provide its reference designator (e.g., U1) and its value (e.g., RP2040-Zero, ProMicro).
+- **Pin Count & Package:** Note the total number of pins and the package type (e.g., QFN, TQFP, module).
+- **Unused Pins:** List the specific pin numbers and names/labels of microcontroller pins that are marked as unconnected (NC) in the schematic or are not routed to any component in the PCB. Provide their coordinates on the PCB if possible.
+- **Pin Naming:** Document the naming convention used for MCU pins (e.g., GPIOXX, P0.XX, PAXX).
+
+**3. Component Technology (from .kicad_pcb and .kicad_sch)**
+- **Technology Mix:** Briefly state if the design is primarily Surface Mount (SMD), Through-Hole (TH), or a mix.
+- **Diodes:** Identify the reference designator pattern for diodes (e.g., D1, D2...). Note their type (SMD or TH) and how they are oriented relative to the switch footprints (e.g., anode towards switch pin 1, cathode towards column).
+- **Switch Identifiers:** What reference designators (e.g., SW1, K1) and footprint names (e.g., MX_Alps_Hybrid, CHOC) are used for the keyboard switches?
+- **Potential Relocations:** Are there any components (like diodes, resistors, capacitors) placed very close to or within the typical keep-out area of the existing switch footprints that might need moving when the footprint is changed?
+- **Diode-Switch Connection:** Describe how diodes electrically connect to the switches (e.g., "Diode Cathode connects to Switch Pin 1", "Diode Anode connects to Row Net").
+
+**4. Switch Footprint Analysis (from .kicad_pcb)**
+- **Current Footprint:** Identify the exact name(s) of the KiCad footprint library identifier used for the switches (e.g., MX_Only.pretty:MX-1U-NoLED).
+- **Dimensions:** Measure the pin-to-pin spacing for the switch electrical pins and the diameter/size of the pads/holes.
+- **Coordinates:** Provide the X, Y coordinates for the center or pin 1 of a few representative switches (e.g., top-left, bottom-right, one central switch).
+- **Spacing:** Calculate the center-to-center distance between adjacent switches horizontally and vertically (standard key pitch is often 19.05mm x 19.05mm, but verify).
+
+**5. Matrix Wiring Pattern (from .kicad_pcb and .kicad_sch)**
+- **Net Names:** List the naming pattern used for the matrix row nets (e.g., ROW0, ROW1...) and column nets (e.g., COL0, COL1...).
+- **Diode Role:** Confirm how diodes are integrated (e.g., "Each switch connects a Column net to a Diode; the other side of the Diode connects to the Row net").
+- **Trace Widths:** What is the typical trace width used for the row and column connections?
+
+**6. Available GPIO Analysis (from .kicad_sch and .kicad_pcb)**
+- **List Unused GPIO:** Reiterate the list of unused microcontroller GPIO pins identified in step 2, ensuring they are truly unconnected on the PCB. Provide their exact names/numbers as referenced in the schematic and PCB.
+- **PCB Locations:** For these unused pins, identify their physical breakout points on the PCB (e.g., coordinates of the pad or via they are connected to, if any, even if that trace goes nowhere).
+
+**7. PCB Structure for Automation (from .kicad_pcb, .kicad_sch, and .kicad_pro)**
+- **Project File Check (.kicad_pro):** Examine the project file (<path_to_keyboard_name>.kicad_pro). List any project-specific symbol (.kicad_sym) or footprint (.pretty) libraries defined within it. Note their names and relative paths if specified.
+- **Hierarchy:** Is the schematic organized using hierarchical sheets, or is it a flat design?
+- **Libraries in Use:** Note the names of any custom footprint (.pretty) or symbol (.kicad_sym) libraries referenced *within the schematic or PCB files themselves* that might be relevant (this might overlap with the project file check but confirms actual usage).
+- **Naming Conventions:** Summarize observed naming conventions for nets, components (beyond switches/diodes), and potentially graphical elements if consistent.
+
+**8. Physical Space for 5-Way Switch (from .kicad_pcb)**
+- **Potential Locations:** Identify 2-3 potential open areas on the PCB suitable for mounting a typical 5-way navigation switch footprint (approx. 10x10mm to 15x15mm). Provide the center coordinates of these areas.
+- **Clearances:** For each potential location, measure the approximate distance to the nearest existing components and the board edge.
+- **Proximity to GPIO:** Note which unused GPIO pins (from step 6) are physically closest to these potential mounting locations.
+
+**Output Format:** Please structure the output clearly, addressing each of the 8 points above with the requested details. Use exact names, values, and coordinates from the files.

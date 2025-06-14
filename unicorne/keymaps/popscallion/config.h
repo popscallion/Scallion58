@@ -5,7 +5,7 @@
 
 #undef STARTUP_SONG
 #define STARTUP_SONG SONG(NO_SOUND)
-#define COMBO_TERM 35
+#define COMBO_TERM 25
 #define COMBO_COUNT 33
 
 

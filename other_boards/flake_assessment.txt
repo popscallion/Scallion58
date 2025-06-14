@@ -1,0 +1,205 @@
+1. PCB Technical Specifications (from .kicad_pcb & .kicad_pro)
+
+KiCad Version: Created or last saved with KiCad 8.0 (generator_version "8.0", file format version 20240108).
+
+Layers:
+
+Copper: F.Cu (Layer 0), B.Cu (Layer 31)
+
+Other significant layers: F.Mask, B.Mask, F.SilkS, B.SilkS, Edge.Cuts
+
+Design Rules (from .kicad_pro):
+
+Minimum Trace Width: 0.15 mm (min_track_width)
+
+Minimum Clearance: 0.15 mm (min_clearance)
+
+Minimum Via Diameter: 0.3 mm (min_via_diameter)
+
+Minimum Via Annular Width: 0.15 mm (min_via_annular_width)
+
+Vias (from .kicad_pro & .kicad_pcb):
+
+Default Via Diameter: 0.6 mm (via_diameter)
+
+Default Via Drill Size: 0.3 mm (via_drill)
+
+Tenting: Vias appear exposed (untented) based on (pcbplotparams ... (viasonmask no)) in the .kicad_pcb file.
+
+2. Microcontroller Details (from .kicad_sch & .kicad_pcb)
+
+Identification: Two microcontrollers are used:
+
+U1: Value ProMicro (Footprint axseem:ProMicro_SMD on Left sheet)
+
+U2: Value ProMicro (Footprint axseem:ProMicro_SMD on Right sheet)
+
+Pin Count & Package: ProMicro module (Typically 24 main I/O pins + Power/GND/Reset). Package is a Module.
+
+Pin Naming Convention: Mixed convention based on Arduino pin names and Atmega32U4 port/pin names (e.g., TX0/D3, RX1/D2, 2/D1/SDA, F7/A0, B6/10).
+
+Unused Pins & Coordinates (from .kicad_pcb nets 47-60):
+
+U1 (Left MCU):
+
+Pad 1 (TX0/D3): Net 56 - unconnected. Coord: (-7.62 -12.7) relative to U1 center (189.64 121.01).
+
+Pad 11 (8/B4): Net 48 - unconnected. Coord: (-7.62 12.7) relative to U1 center.
+
+Pad 16 (B1/15): Net 49 - unconnected. Coord: (7.62 7.62) relative to U1 center.
+
+Pad 17 (F7/A0): Net 55 - unconnected. Coord: (7.62 5.08) relative to U1 center.
+
+Pad 18 (F6/A1): Net 47 - unconnected. Coord: (7.62 2.54) relative to U1 center.
+
+Pad 19 (F5/A2): Net 54 - unconnected. Coord: (7.62 0) relative to U1 center.
+
+Pad 20 (F4/A3): Net 53 - unconnected. Coord: (7.62 -2.54) relative to U1 center.
+
+U2 (Right MCU):
+
+Pad 1 (TX0/D3): Net 51 - unconnected. Coord: (-7.62 -12.7) relative to U2 center (228.36 121.01).
+
+Pad 5 (2/D1/SDA): Net 52 - unconnected. Coord: (-7.62 -2.54) relative to U2 center.
+
+Pad 6 (3/D0/SCL): Net 50 - unconnected. Coord: (-7.62 0) relative to U2 center.
+
+Pad 7 (4/D4): Net 60 - unconnected. Coord: (-7.62 2.54) relative to U2 center.
+
+Pad 8 (5/C6): Net 57 - unconnected. Coord: (-7.62 5.08) relative to U2 center.
+
+Pad 9 (6/D7): Net 59 - unconnected. Coord: (-7.62 7.62) relative to U2 center.
+
+Pad 14 (B2/16): Net 58 - unconnected. Coord: (7.62 12.7) relative to U2 center.
+
+Note: Coordinates are relative to the footprint anchor.
+
+3. Component Technology (from .kicad_pcb & .kicad_sch)
+
+Technology Mix: The design is a mix of Surface Mount (SMD) and Through-Hole (TH) components. MCUs (modules) and diodes are SMD. Switches use a hybrid footprint supporting TH pins and SMD hotswap sockets. Mounting holes are TH.
+
+Diodes:
+
+Reference Designators: D1 - D46.
+
+Type: SMD (Diode_SMD:D_SOD-323_HandSoldering footprint).
+
+Orientation: Placed adjacent to switches. Based on D13/SW13 example: Diode Anode (Pad 2) connects to Switch Pin 2. Diode Cathode (Pad 1) connects to the Row net.
+
+Switch Identifiers:
+
+Reference Designators: SW1 - SW46.
+
+Footprint Name: axseem:SW_MX_Choc-v1v2_Hotswap.
+
+Potential Relocations: Diodes are placed close to the switch footprints. Changing to a significantly different switch footprint (like Gateron KS-33 which has different pin positions than MX/Choc v1) would likely require relocating the diodes and rerouting associated traces.
+
+Diode-Switch Connection: Switch Pin 2 connects to the Diode Anode (Pad 2). Switch Pin 1 connects to the Column Net. The Diode Cathode (Pad 1) connects to the Row Net.
+
+4. Switch Footprint Analysis (from .kicad_pcb)
+
+Current Footprint: axseem:SW_MX_Choc-v1v2_Hotswap (Supports Choc v1/v2 and MX switches with hotswap sockets).
+
+Dimensions (approximate, based on pad coordinates relative to footprint center):
+
+Through-Hole Pin Spacing (Pad 1 @ (-5, 3.75), Pad 2 @ (0, 5.95)): ~5.45mm apart.
+
+Through-Hole Pad/Drill Size: 3.3mm pad, 3.0mm drill.
+
+Hotswap Socket Pad Spacing (Pad 1 @ (-8.245, 3.75) / (-7.36, -2.54), Pad 2 @ (3.245, 5.95) / (6.09, -5.08)): Complex, designed for Kailh sockets.
+
+Central Stem Hole: 4.9mm diameter drill.
+
+Stabilizer Holes (oval): 2.12mm x 1.7mm drill.
+
+Coordinates (Representative Switches):
+
+SW1 (Top-Left area): (76 123.5)
+
+SW13 (Example used): (76 161.5)
+
+SW33 (Right side, inner thumb): (285 128.25)
+
+SW46 (Bottom-Right area, angled): (225.17 181.94) @ 30 deg rotation.
+
+Spacing: Center-to-center distance between adjacent switches appears to be 19.0 mm horizontally and vertically for the main alpha block, consistent with standard MX spacing (even though using Choc-compatible footprints). Thumb cluster spacing varies due to angles/positions.
+
+5. Matrix Wiring Pattern (from .kicad_pcb & .kicad_sch)
+
+Net Names:
+
+Rows: LRow 0 to LRow 3 (Left), RRow 0 to RRow 3 (Right)
+
+Columns: LCol 0 to LCol 5 (Left), RCol 0 to RCol 5 (Right)
+
+Diode Role: Confirmed: Each switch connects a Column net (via Pin 1) to a Diode Anode (via Pin 2). The Diode Cathode connects to the corresponding Row net. This is a standard column-to-row configuration.
+
+Trace Widths: Typical trace width observed for matrix connections appears to be 0.15 mm.
+
+6. Available GPIO Analysis (from .kicad_sch & .kicad_pcb)
+
+List Unused GPIO (Reiteration):
+
+U1 (Left): Pin 1 (TX0/D3), Pin 11 (8/B4), Pin 16 (B1/15), Pin 17 (F7/A0), Pin 18 (F6/A1), Pin 19 (F5/A2), Pin 20 (F4/A3).
+
+U2 (Right): Pin 1 (TX0/D3), Pin 5 (2/D1/SDA), Pin 6 (3/D0/SCL), Pin 7 (4/D4), Pin 8 (5/C6), Pin 9 (6/D7), Pin 14 (B2/16).
+
+PCB Locations (Pad Coordinates relative to MCU center):
+
+U1 (Center 189.64, 121.01): (-7.62, -12.7), (-7.62, 12.7), (7.62, 7.62), (7.62, 5.08), (7.62, 2.54), (7.62, 0), (7.62, -2.54).
+
+U2 (Center 228.36, 121.01): (-7.62, -12.7), (-7.62, -2.54), (-7.62, 0), (-7.62, 2.54), (-7.62, 5.08), (-7.62, 7.62), (7.62, 12.7).
+
+7. PCB Structure for Automation (from .kicad_pcb, .kicad_sch, .kicad_pro)
+
+Project File Check (.kicad_pro): The provided .kicad_pro file is minimal and does not explicitly define project-specific libraries within its structure. Libraries seem to be referenced directly or are standard KiCad libraries.
+
+Hierarchy: The schematic is hierarchical, using separate sheet files (left.kicad_sch, right.kicad_sch) instantiated in the root sheet.
+
+Libraries in Use:
+
+Footprints: axseem: (appears custom, used for ProMicro, Switches, Holes), Diode_SMD:, MountingHole: (likely standard or modified standard KiCad libraries).
+
+Symbols: (Requires deeper schematic parsing, but likely includes standard Device, Connector, Switch symbols plus custom symbols for the ProMicro modules if not using a standard one).
+
+Naming Conventions: Consistent use of prefixes (L/R for Left/Right), component types (SW, D, U, J, JP, H, RSW), and net types (Col, Row, Net-, unconnected-).
+
+8. Physical Space for 5-Way Switch (from .kicad_pcb - Estimated)
+
+Potential Locations (Estimated Coordinates):
+
+Between MCUs: Approx. (209, 121) - Relatively open space between U1 and U2.
+
+Inner Top Edge (Left): Approx. (170, 105) - Above the main key cluster, near the top edge.
+
+Inner Top Edge (Right): Approx. (248, 105) - Mirrored position on the right side.
+
+Clearances (Approximate):
+
+Location 1: Close proximity to U1/U2 (~10mm) and inner column switches (~10-15mm).
+
+Location 2/3: Clear space below, nearest components are top-row switches (~10-15mm away). Distance to board edge depends on final outline.
+
+Proximity to GPIO:
+
+Location 1 (Near 209, 121): Relatively close to inner pins of both U1 and U2. Unused pins like U1 Pad 16 (B1/15) at (197.26, 128.63) absolute, or U2 Pad 9 (6/D7) at (220.74, 128.63) absolute might be reachable.
+
+Location 2/3 (Near 170/248, 105): Further from the main MCU pads. Routing might be more complex.
+
+Automation Feasibility Assessment:
+
+Switch Conversion (to KS-33): High complexity. The axseem:SW_MX_Choc-v1v2_Hotswap footprint is designed for MX/Choc v1 spacing and Kailh hotswap sockets. Gateron KS-33 switches have different pin positions and require different hotswap sockets (like Mill-Max 3305/7305 or specific Gateron sockets). This requires:
+
+Replacing all SW\* footprints with a KS-33 compatible one.
+
+Relocating all associated diodes (D\*).
+
+Significant rerouting of row, column, and diode traces. This is challenging to automate reliably without sophisticated routing algorithms or manual intervention.
+
+Adding 5-Way Switch: Moderate complexity.
+
+Requires selecting a footprint for the 5-way switch.
+
+Placing the footprint in an available space (requires geometric checks or manual placement).
+
+Connecting the 5 switch pins + common pin (6 total) to available MCU GPIOs. Several unused GPIOs are available on both MCUs. Routing depends heavily on the chosen location and the proximity of unused GPIO pads/vias. Automation is feasible for netlist connection but placement and routing might need manual guidance or advanced scripting.
