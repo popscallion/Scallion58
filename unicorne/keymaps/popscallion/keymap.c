@@ -44,6 +44,10 @@ enum combos {
     F_G_BRID_H,     // F + G = Brightness Down
     Y_U_VOLU,       // Y + U = Volume Up
     H_J_VOLD,       // H + J = Volume Down
+    GLOB_LEFT_HOME,  // Globe + ← = Home
+    GLOB_RGHT_END,   // Globe + → = End
+    GLOB_UP_PGUP,    // Globe + ↑ = Page Up
+    GLOB_DOWN_PGDN,  // Globe + ↓ = Page Down
 };
 
 
@@ -84,6 +88,12 @@ const uint16_t PROGMEM r_t_combo[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM f_g_combo[] = {KC_F, KC_G, COMBO_END};
 const uint16_t PROGMEM y_u_combo[] = {KC_Y, KC_U, COMBO_END};
 const uint16_t PROGMEM h_j_combo[] = {KC_H, KC_J, COMBO_END};
+// Globe navigation combos
+const uint16_t PROGMEM glob_left_combo[] = {AP_GLOB, KC_LEFT, COMBO_END};
+const uint16_t PROGMEM glob_rght_combo[] = {AP_GLOB, KC_RGHT, COMBO_END};
+const uint16_t PROGMEM glob_up_combo[] = {AP_GLOB, KC_UP, COMBO_END};
+const uint16_t PROGMEM glob_down_combo[] = {AP_GLOB, KC_DOWN, COMBO_END};
+
 combo_t key_combos[] = {
     // Numbers
     [Q_A_1] = COMBO(q_a_combo, KC_1),
@@ -128,6 +138,11 @@ combo_t key_combos[] = {
     [L_DOWN_DOT] = COMBO(l_down_dot_combo, KC_DOT),
     [SCLN_UP_SLSH] = COMBO(scln_up_slsh_combo, KC_SLSH),
     [QUOT_RGHT_BSLS] = COMBO(quot_rght_bsls_combo, KC_BSLS),
+
+    [GLOB_LEFT_HOME] = COMBO(glob_left_combo, KC_HOME),
+    [GLOB_RGHT_END] = COMBO(glob_rght_combo, KC_END),
+    [GLOB_UP_PGUP] = COMBO(glob_up_combo, KC_PGUP),
+    [GLOB_DOWN_PGDN] = COMBO(glob_down_combo, KC_PGDN)
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
