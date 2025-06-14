@@ -33,8 +33,8 @@ enum combos {
     L_DOWN_DOT,     // L + ↓ = .
     SCLN_UP_SLSH,   // ; + ↑ = /
     QUOT_RGHT_BSLS, // ' + → = \|
-    A_Z_BRIU,       // A + Z = Brightness Up
-    S_X_BRID,       // S + X = Brightness Down
+    A_Z_F11,       // A + Z = F11
+    S_X_F12,       // S + X = F12
     C_D_F13,        // C + D = F13
     F_V_F14,        // F + V = F14
     G_B_F15,        // G + B = F15
@@ -112,8 +112,8 @@ combo_t key_combos[] = {
     [QUOT_BSPC_GRV] = COMBO(quot_bspc_combo, KC_GRV),
 
     // Function Keys & Brightness (Vertical)
-    [A_Z_BRIU] = COMBO(a_z_combo, KC_BRIU),
-    [S_X_BRID] = COMBO(s_x_combo, KC_BRID),
+    [A_Z_F11] = COMBO(a_z_combo, KC_F11),
+    [S_X_F12] = COMBO(s_x_combo, KC_F12),
     [C_D_F13] = COMBO(c_d_combo, KC_F13),
     [F_V_F14] = COMBO(f_v_combo, KC_F14),
     [G_B_F15] = COMBO(g_b_combo, KC_F15),
@@ -165,28 +165,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         globe_pressed = record->event.pressed;
         host_consumer_send(record->event.pressed ? AC_NEXT_KEYBOARD_LAYOUT_SELECT : 0);
         return true;
-    
+
     case KC_LEFT:
         if (globe_pressed && record->event.pressed) {
             tap_code(KC_HOME);
             return false;
         }
         break;
-    
+
     case KC_RGHT:
         if (globe_pressed && record->event.pressed) {
             tap_code(KC_END);
             return false;
         }
         break;
-    
+
     case KC_UP:
         if (globe_pressed && record->event.pressed) {
             tap_code(KC_PGUP);
             return false;
         }
         break;
-    
+
     case KC_DOWN:
         if (globe_pressed && record->event.pressed) {
             tap_code(KC_PGDN);
